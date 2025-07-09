@@ -5,10 +5,20 @@ services :
     build : "./requirements/nginx/"
     ports :
       - "443:443"
-    environment:
+    environment :
       - DOMAIN_NAME=${DOMAIN_NAME}
-    networks:
+    networks :
       - inception-network
+    volumes :
+      - wordpress:/wordpress
 
 networks:
   inception-network:
+
+volumes:
+  wordpress:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/rguigneb/data/wordpress
