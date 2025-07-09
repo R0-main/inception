@@ -1,0 +1,14 @@
+version : "3.8"
+
+services :
+  nginx :
+    build : "./requirements/nginx/"
+    ports :
+      - "443:443"
+    environment:
+      - DOMAIN_NAME=${DOMAIN_NAME}
+    networks:
+      - inception-network
+
+networks:
+  inception-network:
