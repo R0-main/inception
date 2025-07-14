@@ -13,6 +13,8 @@ RUN apt-get update && apt-get install -y \
     php8.2-zip \
     curl \
     unzip \
+    sudo \
+    iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
 # Configure PHP-FPM to listen on all interfaces
@@ -34,6 +36,10 @@ RUN chmod -R 755 /var/www/html
 
 # Create PHP-FPM run directory
 RUN mkdir -p /run/php
+
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar
+RUN chmod +x wp-cli.phar
+RUN mv wp-cli.phar /usr/local/bin/wp
 
 # Copy entrypoint script
 COPY ./tools/docker-entrypoint.sh /docker-entrypoint.sh

@@ -6,11 +6,16 @@ RUN sudo apt install -y mariadb-server
 # Create the directory for the MySQL socket
 RUN mkdir -p /run/mysqld && chown mysql:mysql /run/mysqld
 
-RUN mysql_install_db --user=mysql --datadir=/var/lib/mysql
+RUN sudo mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
 EXPOSE 3306
 
-# Switch to mysql user
-USER mysql
+COPY ./conf/init.sql /tmp/init.sql
+COPY ./conf/mariadb.conf /etc/mysql/mariadb.conf.d/99-custom.cnf
 
-CMD ["mysqld", "--user=mysql"]
+# Set proper permissions
+RUN chown mysql:mysql /etc/mysql/mariadb.conf.d/99-custom.cnf && \
+    chmod 644 /etc/mysql/mariadb.conf.d/99-custom.cnf
+
+
+CMD ["sudo", "mysqld", "--user=mysql", "--init-file=/tmp/init.sql"]
