@@ -25,15 +25,21 @@ services :
       - inception-network
     volumes :
       - wordpress:/var/www/html
-  mariadb :
-    build : "./requirements/mariadb/"
-    environment :
-      MARIADB_USER: ${MYSQL_USER}
-      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
-    networks :
+    depends_on:
+      - mariadb
+
+  mariadb:
+    build: "./requirements/mariadb/"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: wordpress
+      MYSQL_PASSWORD: secure_password
+    networks:
       - inception-network
-    volumes :
+    volumes:
       - mariadb:/var/lib/mysql
+
 
 networks:
   inception-network:
