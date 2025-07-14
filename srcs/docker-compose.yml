@@ -25,8 +25,6 @@ services :
       - inception-network
     volumes :
       - wordpress:/var/www/html
-    expose:
-      - "9000"
   # mariadb :
   #   build : "./requirements/mariadb/"
   #   environment :
@@ -35,18 +33,7 @@ services :
   #   networks :
   #     - inception-network
   #   volumes :
-  #     - wordpress:/wordpress
-  # wordpress :
-  #   build : "./requirements/wordpress/"
-  #   environment :
-  #     WORDPRESS_DB_HOST: mysql:3306
-  #     WORDPRESS_DB_NAME: wordpress
-  #     WORDPRESS_DB_USER: wordpress
-  #     WORDPRESS_DB_PASSWORD: secure_password
-  #   networks :
-  #     - inception-network
-  #   volumes :
-  #     - wordpress:/wordpress
+  #     - mariadb:/var/lib/mysql
 
 networks:
   inception-network:
@@ -58,10 +45,10 @@ volumes:
       type: none
       o: bind
       device: /home/rguigneb/data/wordpress
-  DB:
+  mariadb:
     driver: local
     driver_opts:
       type: none
       o: bind
-      device: /home/rguigneb/data/DB
+      device: /home/rguigneb/data/mariadb
 

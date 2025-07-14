@@ -35,8 +35,6 @@ RUN chmod -R 755 /var/www/html
 # Create PHP-FPM run directory
 RUN mkdir -p /run/php
 
-EXPOSE 9000
-
 # Copy entrypoint script
 COPY ./tools/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
