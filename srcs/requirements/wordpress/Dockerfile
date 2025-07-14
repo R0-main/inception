@@ -30,6 +30,7 @@ RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
     tar -xzf wordpress.tar.gz --strip-components=1 && \
     rm wordpress.tar.gz
 
+
 # Set correct permissions
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html
@@ -43,6 +44,8 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 
 # Copy entrypoint script
 COPY ./tools/docker-entrypoint.sh /docker-entrypoint.sh
+COPY ./conf/wp-config.php /var/www/html/wp-config.php
+
 RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
