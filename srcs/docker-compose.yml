@@ -17,7 +17,7 @@ services :
   wordpress :
     build : "./requirements/wordpress/"
     environment :
-      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_HOST: mariadb:3306
       WORDPRESS_DB_NAME: wordpress
       WORDPRESS_DB_USER: wordpress
       WORDPRESS_DB_PASSWORD: secure_password
@@ -25,15 +25,15 @@ services :
       - inception-network
     volumes :
       - wordpress:/var/www/html
-  # mariadb :
-  #   build : "./requirements/mariadb/"
-  #   environment :
-  #     MARIADB_USER: ${MYSQL_USER}
-  #     MARIADB_PASSWORD: ${MYSQL_PASSWORD}
-  #   networks :
-  #     - inception-network
-  #   volumes :
-  #     - mariadb:/var/lib/mysql
+  mariadb :
+    build : "./requirements/mariadb/"
+    environment :
+      MARIADB_USER: ${MYSQL_USER}
+      MARIADB_PASSWORD: ${MYSQL_PASSWORD}
+    networks :
+      - inception-network
+    volumes :
+      - mariadb:/var/lib/mysql
 
 networks:
   inception-network:
