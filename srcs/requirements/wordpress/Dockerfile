@@ -25,10 +25,10 @@ RUN sed -i 's/;listen.group = www-data/listen.group = www-data/' /etc/php/8.2/fp
 # Set working dir
 WORKDIR /var/www/html
 
-# Download and extract WordPress
-RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
-    tar -xzf wordpress.tar.gz --strip-components=1 && \
-    rm wordpress.tar.gz
+# # Download and extract WordPress
+# RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
+#     tar -xzf wordpress.tar.gz --strip-components=1 && \
+#     rm wordpress.tar.gz
 
 
 # Set correct permissions
@@ -42,10 +42,16 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
 RUN chmod +x wp-cli.phar
 RUN mv wp-cli.phar /usr/local/bin/wp
 
+RUN wp cli update --allow-root
+RUN wp core download --allow-root
+
+# RUN wp config create --allow-root --dbname=wordpress --dbuser=wordpress --dbpass=secure_password --dbhost=mariadb --dbprefix=wp_
+COPY ./conf/wp-config.php /var/www/html/wp-config.php
+
 # Copy entrypoint script
 COPY ./tools/docker-entrypoint.sh /docker-entrypoint.sh
-COPY ./conf/wp-config.php /var/www/html/wp-config.php
 
 RUN chmod +x /docker-entrypoint.sh
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
+
