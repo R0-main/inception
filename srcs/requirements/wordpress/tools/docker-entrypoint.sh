@@ -7,4 +7,4 @@ wp core install --allow-root --url=rguigneb.42.fr --title=42 --admin_user=rguign
 
 # Start PHP-FPM
 echo "Starting PHP-FPM..."
-exec /usr/sbin/php-fpm8.2 -F
+exec /usr/sbin/php-fpm7.4 -F

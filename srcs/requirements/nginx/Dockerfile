@@ -1,4 +1,4 @@
-FROM debian:12.11
+FROM debian:bullseye
 
 RUN apt update && apt-get -y install sudo
 RUN sudo apt install -y nginx openssl gettext-base

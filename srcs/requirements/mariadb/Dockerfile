@@ -1,4 +1,4 @@
-FROM debian:12.11
+FROM debian:bullseye
 
 RUN apt update && apt-get -y install\
     sudo\
@@ -14,5 +14,7 @@ COPY ./conf/mariadb.conf /etc/mysql/mariadb.conf.d/99-custom.cnf
 
 RUN chown mysql:mysql /etc/mysql/mariadb.conf.d/99-custom.cnf
 RUN chmod 644 /etc/mysql/mariadb.conf.d/99-custom.cnf
+
+EXPOSE 3306
 
 CMD ["mysqld", "--user=mysql", "--init-file=/tmp/init.sql"]
