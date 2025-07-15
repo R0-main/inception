@@ -35,7 +35,6 @@ RUN mv wp-cli.phar /usr/local/bin/wp
 RUN wp cli update --allow-root
 RUN wp core download --allow-root
 
-COPY ./conf/wp-config.php /var/www/html/wp-config.php
 COPY ./tools/docker-entrypoint.sh /docker-entrypoint.sh
 
 RUN chmod +x /docker-entrypoint.sh

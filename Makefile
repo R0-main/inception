@@ -21,6 +21,11 @@ up: setup
 down:
 	$(DK_COMPOSE) down
 
+clean-data:
+	@echo "Removing data directories..."
+	@sudo rm -rf $(DATA_DIR)
+	@echo "Data directories removed successfully!"
+
 clean: down
 	docker system prune -af
 	docker volume prune -f
