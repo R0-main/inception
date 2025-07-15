@@ -3,7 +3,7 @@ USER=rguigneb
 DATA_DIR = /home/$(USER)/data
 SRCS=./srcs
 COMPOSE_YML=$(SRCS)/docker-compose.yml
-DK_COMPOSE=docker-compose -f $(COMPOSE_YML)
+DK_COMPOSE=docker compose -f $(COMPOSE_YML)
 
 all: setup up
 

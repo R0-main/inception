@@ -1,5 +1,7 @@
 #!/bin/bash
 
+export WORDPRESS_DB_PASSWORD=$(cat /run/secrets/db_password)
+
 # Create wp-config.php if it doesn't exist
 if [ ! -f wp-config.php ]; then
     echo "Creating wp-config.php..."
