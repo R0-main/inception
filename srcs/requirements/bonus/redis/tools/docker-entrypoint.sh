@@ -1,0 +1,7 @@
+#!/bin/sh
+# Start Redis server
+echo "Starting Redis server..."
+sudo systemctl enable redis-server
+sudo systemctl start redis-server
+
+exec redis-server --protected-mode no --bind 0.0.0.0 --port 6379 --daemonize yes

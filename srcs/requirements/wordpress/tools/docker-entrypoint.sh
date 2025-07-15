@@ -29,6 +29,9 @@ if ! wp core is-installed --allow-root ; then
         ${WP_SUB_EMAIL} \
         --user_pass=${WP_SUB_PASSWORD} \
         --role=subscriber
+
+	wp plugin install redis-cache --activate --allow-root
+	wp redis enable --allow-root
 fi
 
 # Start PHP-FPM
