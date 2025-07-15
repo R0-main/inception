@@ -5,8 +5,6 @@ SRCS=./srcs
 COMPOSE_YML=$(SRCS)/docker-compose.yml
 DK_COMPOSE=docker-compose -f $(COMPOSE_YML)
 
-# add hosts..
-
 all: setup up
 
 setup:

@@ -18,7 +18,7 @@ COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 WORKDIR /var/www/html
 
-# # Download and extract WordPress
+# AN OTHER WAY TO DOWNLOAD WORDPRESS
 # RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
 #     tar -xzf wordpress.tar.gz --strip-components=1 && \
 #     rm wordpress.tar.gz
