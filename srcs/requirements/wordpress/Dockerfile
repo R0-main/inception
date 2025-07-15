@@ -14,9 +14,7 @@ RUN apt-get update && apt-get install -y \
     iputils-ping \
     && rm -rf /var/lib/apt/lists/*
 
-RUN sed -i 's/listen = \/run\/php\/php7.4-fpm.sock/listen = 9000/' /etc/php/7.4/fpm/pool.d/www.conf
-RUN sed -i 's/;listen.owner = www-data/listen.owner = www-data/' /etc/php/7.4/fpm/pool.d/www.conf
-RUN sed -i 's/;listen.group = www-data/listen.group = www-data/' /etc/php/7.4/fpm/pool.d/www.conf
+COPY ./conf/www.conf /etc/php/7.4/fpm/pool.d/www.conf
 
 WORKDIR /var/www/html
 
@@ -24,7 +22,6 @@ WORKDIR /var/www/html
 # RUN curl -o wordpress.tar.gz https://wordpress.org/latest.tar.gz && \
 #     tar -xzf wordpress.tar.gz --strip-components=1 && \
 #     rm wordpress.tar.gz
-
 
 RUN chown -R www-data:www-data /var/www/html
 RUN chmod -R 755 /var/www/html
