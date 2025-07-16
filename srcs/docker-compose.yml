@@ -21,6 +21,14 @@ services :
     networks:
       - inception-network
 
+  adminer:
+    build : "./requirements/bonus/adminer/"
+    restart: always
+    depends_on:
+      - mariadb
+    networks:
+      - inception-network
+
   wordpress :
     build : "./requirements/wordpress/"
     secrets:
