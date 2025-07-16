@@ -31,6 +31,8 @@ if ! wp core is-installed --allow-root ; then
         --role=subscriber
 
 	wp plugin install redis-cache --activate --allow-root
+    wp config set WP_REDIS_HOST "${REDIS_HOST:-redis}" --allow-root
+    wp config set WP_REDIS_PORT "${REDIS_PORT:-6379}" --raw --allow-root
 	wp redis enable --allow-root
 fi
 

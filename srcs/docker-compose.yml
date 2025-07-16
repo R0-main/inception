@@ -16,8 +16,8 @@ services :
   redis:
     build : "./requirements/bonus/redis/"
     restart: always
-    ports:
-      - "6379:6379"
+    depends_on:
+      - wordpress
     networks:
       - inception-network
 
@@ -37,6 +37,8 @@ services :
       WP_SUB_USER: ${WP_SUB_USER}
       WP_SUB_EMAIL: ${WP_SUB_EMAIL}
       WP_SUB_PASSWORD: ${WP_SUB_PASSWORD}
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
     networks :
       - inception-network
     volumes :
