@@ -29,6 +29,18 @@ services :
     networks:
       - inception-network
 
+  static-website:
+    build : "./requirements/bonus/static-website/"
+    restart: always
+    ports:
+      - "1313:1313"
+    volumes:
+      - static-website:/quickstart/
+    depends_on:
+      - nginx
+    networks:
+      - inception-network
+
   wordpress :
     build : "./requirements/wordpress/"
     secrets:
@@ -93,4 +105,10 @@ volumes:
       type: none
       o: bind
       device: /home/rguigneb/data/mariadb
+  static-website:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/rguigneb/data/static-website
 
