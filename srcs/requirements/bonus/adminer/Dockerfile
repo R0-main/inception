@@ -14,4 +14,6 @@ RUN sudo echo "Alias /adminer.php /usr/share/adminer/adminer.php" | sudo tee /et
 COPY ./tools/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-ENTRYPOINT ["/docker-entrypoint.sh"]
+EXPOSE 8080
+
+CMD ["php", "-S", "0.0.0.0:8080", "adminer.php"]
