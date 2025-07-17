@@ -10,6 +10,7 @@ setup:
 	@echo "Creating data directories..."
 	@mkdir -p $(DATA_DIR)/wordpress
 	@mkdir -p $(DATA_DIR)/mariadb
+	@mkdir -p $(DATA_DIR)/n8n
 	@if [ ! -d $(DATA_DIR)/static-website ]; then \
 		mkdir -p $(DATA_DIR)/static-website; \
 		git clone --single-branch --branch hugo-config git@github.com:R0-main/MinesWeeper.git $(DATA_DIR)/static-website ;\
