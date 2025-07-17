@@ -10,8 +10,11 @@ setup:
 	@echo "Creating data directories..."
 	@mkdir -p $(DATA_DIR)/wordpress
 	@mkdir -p $(DATA_DIR)/mariadb
-	@mkdir -p $(DATA_DIR)/static-website
-	@git clone --single-branch --branch hugo-config git@github.com:R0-main/MinesWeeper.git $(DATA_DIR)/static-website
+	@if [ ! -d $(DATA_DIR)/static-website ]; then \
+		mkdir -p $(DATA_DIR)/static-website; \
+		git clone --single-branch --branch hugo-config git@github.com:R0-main/MinesWeeper.git $(DATA_DIR)/static-website ;\
+		echo "Directory exists"; \
+	fi
 	@echo "Configuring /etc/hosts for rguigneb.42.fr..."
 	@if ! grep -q "127.0.0.1 rguigneb.42.fr" /etc/hosts; then \
 		echo "127.0.0.1 rguigneb.42.fr" | sudo tee -a /etc/hosts > /dev/null; \

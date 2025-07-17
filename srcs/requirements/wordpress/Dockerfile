@@ -36,6 +36,7 @@ RUN wp cli update --allow-root
 RUN wp core download --allow-root
 
 COPY ./tools/docker-entrypoint.sh /docker-entrypoint.sh
+COPY ./conf/favicon.ico /var/www/html/favicon.ico
 
 RUN chmod +x /docker-entrypoint.sh
 
