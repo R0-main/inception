@@ -39,6 +39,16 @@ services :
     networks:
       - inception-network
 
+  ftp:
+    build : "./requirements/bonus/ftp/"
+    restart: always
+    volumes:
+      - ftp:/home/ftp
+    depends_on:
+      - nginx
+    networks:
+      - inception-network
+
   n8n:
     build: "./requirements/bonus/n8n/"
     restart: always
@@ -67,12 +77,9 @@ services :
       N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: "false"
       N8N_DISABLE_SENTRY: "true"
     depends_on:
-      - mariadb  # Make sure this matches your MariaDB service name
+      - mariadb
     networks:
       - inception-network
-      - internet
-    # volumes:
-    #   - n8n:/n8n
 
   wordpress :
     build : "./requirements/wordpress/"
@@ -117,7 +124,6 @@ services :
     volumes:
       - mariadb:/var/lib/mysql
 
-# Define secrets
 secrets:
   db_password:
     file: ../secrets/db_password.txt
@@ -128,8 +134,7 @@ secrets:
 networks:
   inception-network:
     driver: bridge
-  internet:
-    driver: bridge
+
 volumes:
   wordpress:
     driver: local
@@ -149,3 +154,9 @@ volumes:
       type: none
       o: bind
       device: /home/rguigneb/data/static-website
+  ftp:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: /home/rguigneb/data/ftp
