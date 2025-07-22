@@ -43,9 +43,12 @@ services :
     build : "./requirements/bonus/ftp/"
     restart: always
     volumes:
-      - ftp:/home/ftp
+      - wordpress:/home/ftp/wordpress
     depends_on:
       - nginx
+    environment:
+      - FTP_USER=ftp
+    user: ftp
     networks:
       - inception-network
 
