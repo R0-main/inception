@@ -48,6 +48,8 @@ services :
       - nginx
     environment:
       - FTP_USER=ftp
+    ports :
+      - "21:21"
     user: ftp
     networks:
       - inception-network
