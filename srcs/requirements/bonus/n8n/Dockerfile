@@ -1,6 +1,6 @@
 FROM debian:bullseye
 
-RUN apt update && apt-get -y install sudo curl default-mysql-client
+RUN apt update && apt-get -y install sudo curl default-mysql-client iputils-ping
 
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
     apt-get install -y nodejs

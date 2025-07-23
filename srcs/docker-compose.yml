@@ -44,9 +44,6 @@ services :
     restart: always
     volumes:
       - wordpress:/home/ftpuser/wordpress
-    environment:
-      - FTP_USER=ftpuser
-      - FTP_PASS=test
     ports :
       - "21:21"
     networks:
@@ -157,9 +154,3 @@ volumes:
       type: none
       o: bind
       device: /home/rguigneb/data/static-website
-  ftp:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: /home/rguigneb/data/ftp
