@@ -1,0 +1,305 @@
+{
+  "name": "My workflow",
+  "nodes": [
+    {
+      "parameters": {
+        "rule": {
+          "interval": [
+            {
+              "field": "seconds"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.scheduleTrigger",
+      "typeVersion": 1.2,
+      "position": [
+        -320,
+        -20
+      ],
+      "id": "55f8ed9f-5c44-4dca-927e-fe52b3b068a7",
+      "name": "Schedule Trigger"
+    },
+    {
+      "parameters": {
+        "command": "ping -c 1 wordpress"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        40,
+        -20
+      ],
+      "id": "bf0ea000-9f4d-4b13-abdd-7218dc7ef635",
+      "name": "Execute Command1"
+    },
+    {
+      "parameters": {
+        "authentication": "webhook",
+        "content": "============================================\n\n    wordpress status : {{ $('Edit Fields1').item.json.wordpress == 0 ? '🟢' : '🔴'}} \n    nginx status : {{ $('Edit Fields1').item.json.nginx == 0 ? '🟢' : '🔴'}}\n    n8n status : {{ $('Edit Fields1').item.json.n8n == 0 ? '🟢' : '🔴'}}\n    adminer status : {{ $('Edit Fields1').item.json.adminer == 0 ? '🟢' : '🔴'}} \n    redis status : {{ $('Edit Fields1').item.json.redis == 0 ? '🟢' : '🔴'}} \n\n===========================================\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.discord",
+      "typeVersion": 2,
+      "position": [
+        1320,
+        -20
+      ],
+      "id": "7bac56b8-261a-47a5-86f2-dd4a11d7840e",
+      "name": "Discord",
+      "webhookId": "79f506c5-75e4-452e-8154-c7f9fe4b011a",
+      "credentials": {
+        "discordWebhookApi": {
+          "id": "57CZAFesurSHOo8e",
+          "name": "Discord Webhook account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "mode": "raw",
+        "jsonOutput": "{\n  \"wordpress\": 1,\n  \"n8n\": 1,\n  \"static\": 1,\n  \"adminer\" : 1,\n  \"nginx\": 1,\n  \"redis\" :1\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -100,
+        -20
+      ],
+      "id": "3ff36ec8-b587-460c-a611-7811450f25bd",
+      "name": "Edit Fields"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "ec9e8c23-0c45-4bc9-bce7-2f773d1a9d0e",
+              "name": "wordpress",
+              "value": "={{ $('Execute Command').item.json.exitCode }}",
+              "type": "number"
+            },
+            {
+              "id": "3cbb907c-5421-4e6d-9f4d-d12f96871365",
+              "name": "nginx",
+              "value": "={{ $('Execute Command1').item.json.exitCode }}",
+              "type": "number"
+            },
+            {
+              "id": "ddfc59db-0e4d-425b-a677-6439281cc077",
+              "name": "static",
+              "value": "={{ $('Execute Command4').item.json.exitCode }}",
+              "type": "number"
+            },
+            {
+              "id": "2ba05d62-7365-4ade-b7c1-88f351d3214a",
+              "name": "adminer",
+              "value": "={{ $('Execute Command3').item.json.exitCode }}",
+              "type": "number"
+            },
+            {
+              "id": "8a8c63a6-f7ec-4b70-9dd1-9007926a5f7e",
+              "name": "redis",
+              "value": "={{ $('Execute Command2').item.json.exitCode }}",
+              "type": "number"
+            },
+            {
+              "id": "2c1b9c38-b6a6-4b28-9336-b9ffa37ac05f",
+              "name": "n8n",
+              "value": "={{ $('Execute Command5').item.json.exitCode }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1180,
+        -20
+      ],
+      "id": "9d198e92-d652-4606-a16a-72c3150346a1",
+      "name": "Edit Fields1"
+    },
+    {
+      "parameters": {
+        "command": "ping -c 1 nginx"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        180,
+        -20
+      ],
+      "id": "d2c419b3-91f3-4f8f-b647-bfc3087648df",
+      "name": "Execute Command"
+    },
+    {
+      "parameters": {
+        "command": "ping -c 1 redis"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        320,
+        -20
+      ],
+      "id": "bc8b8f0b-9a64-4b14-92c4-6053f781d3d6",
+      "name": "Execute Command2"
+    },
+    {
+      "parameters": {
+        "command": "ping -c 1 adminer"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        460,
+        -20
+      ],
+      "id": "ae5bf876-8e48-47b4-9c22-7a58b7cfe581",
+      "name": "Execute Command3"
+    },
+    {
+      "parameters": {
+        "command": "ping -c 1 static-website"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        600,
+        -20
+      ],
+      "id": "6a8f9e61-3305-48a2-b71f-8f7bc4109fac",
+      "name": "Execute Command4"
+    },
+    {
+      "parameters": {
+        "command": "ping -c 1 n8n"
+      },
+      "type": "n8n-nodes-base.executeCommand",
+      "typeVersion": 1,
+      "position": [
+        720,
+        -20
+      ],
+      "id": "79469e50-59f9-44cc-a7fd-b783dea14ab1",
+      "name": "Execute Command5"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "Schedule Trigger": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command1": {
+      "main": [
+        [
+          {
+            "node": "Execute Command",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields": {
+      "main": [
+        [
+          {
+            "node": "Execute Command1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Edit Fields1": {
+      "main": [
+        [
+          {
+            "node": "Discord",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command": {
+      "main": [
+        [
+          {
+            "node": "Execute Command2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command2": {
+      "main": [
+        [
+          {
+            "node": "Execute Command3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command3": {
+      "main": [
+        [
+          {
+            "node": "Execute Command4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command4": {
+      "main": [
+        [
+          {
+            "node": "Execute Command5",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Execute Command5": {
+      "main": [
+        [
+          {
+            "node": "Edit Fields1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1"
+  },
+  "versionId": "25ec4765-e64b-42ef-909c-a742dba3cfff",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "d48bd320ae085bf463b76d1e45fefb5d962c912da99d3f712dff371235634cf3"
+  },
+  "id": "xGwEAaUN5EyhJzmn",
+  "tags": []
+}

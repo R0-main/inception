@@ -15,7 +15,8 @@ EXPOSE 6379
 
 RUN mkdir -p /run/redis
 RUN chown redis:redis /run/redis
-# USER redis
+
+USER redis
 
 VOLUME /data
 WORKDIR /data

@@ -12,13 +12,16 @@ RUN chown -R n8n:n8n /home/n8n/.n8n
 
 COPY ./tools/docker-entrypoint.sh /home/n8n/docker-entrypoint.sh
 RUN chmod +x /home/n8n/docker-entrypoint.sh
+RUN chown n8n:n8n /home/n8n/docker-entrypoint.sh
 
-COPY ./tools/init.sql /home/n8n/init.sql
-RUN chmod +x /home/n8n/init.sql
+COPY ./tools/discord_workflow.json /home/n8n/discord_workflow.json
+RUN chmod +x /home/n8n/discord_workflow.json
+RUN chown n8n:n8n /home/n8n/discord_workflow.json
 
 WORKDIR /home/n8n
 
 USER n8n
+
 EXPOSE 5678
 
 ENTRYPOINT ["/home/n8n/docker-entrypoint.sh"]
