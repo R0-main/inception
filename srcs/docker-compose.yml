@@ -115,7 +115,10 @@ services:
 
   # ───── REDIS ─────
   redis:
-    build: "./requirements/bonus/redis/"
+    build:
+      context: "./requirements/bonus/redis/"
+      args:
+        REDIS_PORT: ${REDIS_PORT}
     restart: always
     depends_on:
       - wordpress
@@ -124,8 +127,13 @@ services:
 
   # ───── ADMINER (DB GUI) ─────
   adminer:
-    build: "./requirements/bonus/adminer/"
+    build:
+      context: "./requirements/bonus/adminer/"
+      args:
+       ADMINER_PORT: ${ADMINER_PORT}
     restart: always
+    environment:
+      ADMINER_DEFAULT_SERVER: ${ADMINER_DEFAULT_SERVER}
     depends_on:
       - mariadb
     networks:
@@ -133,7 +141,10 @@ services:
 
   # ───── STATIC WEBSITE ─────
   static-website:
-    build: "./requirements/bonus/static-website/"
+    build:
+      context: "./requirements/bonus/static-website/"
+      args:
+        STATIC_WEBSITE_PORT: ${STATIC_WEBSITE_PORT}
     restart: always
     volumes:
       - static-website:/quickstart/
@@ -155,7 +166,10 @@ services:
 
   # ───── N8N ─────
   n8n:
-    build: "./requirements/bonus/n8n/"
+    build:
+      context: "./requirements/bonus/n8n/"
+      args:
+        N8N_PORT: ${N8N_PORT}
     restart: always
     secrets:
       - n8n_db_credentials
