@@ -9,7 +9,7 @@ RUN hugo new site quickstart
 
 WORKDIR /quickstart
 
-COPY ./static/ /quickstart/
+COPY ./conf/ /quickstart/
 
 RUN hugo new content content/posts/my-first-post.md
 
