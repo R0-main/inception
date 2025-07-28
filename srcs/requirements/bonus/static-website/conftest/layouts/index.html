@@ -1,0 +1,17 @@
+<body>
+    <link rel="stylesheet" href="css/style.css">
+
+    <div id="menu">
+        <input class="entry" value="20" type="range" id="grid-entry" min="10" max="100" placeholder="Grid">
+        <input class="entry" value="100" type="range" id="bomb-entry" min="1" max="1000" placeholder="Bomb" name="Bomb">
+        <label for="Bomb">Bomb :</label>
+        <input class="check" type="checkbox" id="render-bomb" name="Render Bomb" value="true">
+        <label for="Render Bomb">Render Bomb</label>
+        <button onclick="start()" id="start-btn">Start</button>
+        <H5, id="score">Score : 0</H5>
+    </div>
+
+    <div id="main-grid">
+    </div>
+    <script type="text/javascript" src="js/main.js"></script>
+</body>
