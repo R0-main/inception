@@ -1,7 +1,14 @@
 #!/bin/bash
 
 export WORDPRESS_DB_PASSWORD=$(cat /run/secrets/wp_db_password)
-export WP_ADMIN_PASSWORD=$(cat /run/secrets/wp_admin_password)
+
+export WP_ADMIN_USER=$(sed -n '1p' /run/secrets/wp_admin_user_credentials)
+export WP_ADMIN_EMAIL=$(sed -n '2p' /run/secrets/wp_admin_user_credentials)
+export WP_ADMIN_PASSWORD=$(sed -n '3p' /run/secrets/wp_admin_user_credentials)
+
+export WP_SUB_USER=$(sed -n '1p' /run/secrets/wp_sub_user_credentials)
+export WP_SUB_EMAIL=$(sed -n '2p' /run/secrets/wp_sub_user_credentials)
+export WP_SUB_PASSWORD=$(sed -n '3p' /run/secrets/wp_sub_user_credentials)
 
 # Create wp-config.php if it doesn't exist
 if [ ! -f wp-config.php ]; then

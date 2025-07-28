@@ -34,8 +34,10 @@ volumes:
 secrets:
   wp_db_password:
     file: ../secrets/wordpress/db_password.txt
-  wp_admin_password:
-    file: ../secrets/wordpress/wp_admin_password.txt
+  wp_admin_user_credentials:
+    file: ../secrets/wordpress/wp_admin_user_credentials.txt
+  wp_sub_user_credentials:
+    file: ../secrets/wordpress/wp_sub_user_credentials.txt
   n8n_db_credentials:
     file: ../secrets/n8n/db_credentials.txt
   n8n_encryption_key:
@@ -77,17 +79,13 @@ services:
     restart: always
     secrets:
       - wp_db_password
-      - wp_admin_password
+      - wp_admin_user_credentials
+      - wp_sub_user_credentials
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME}
       WORDPRESS_DB_HOST: mariadb:${MARIADB_PORT}
       WORDPRESS_DB_NAME: ${WP_DATABASE}
       WORDPRESS_DB_USER: ${WP_USER}
-      WP_ADMIN_USER: ${WP_ADMIN_USER}
-      WP_ADMIN_EMAIL: ${WP_ADMIN_EMAIL}
-      WP_SUB_USER: ${WP_SUB_USER}
-      WP_SUB_EMAIL: ${WP_SUB_EMAIL}
-      WP_SUB_PASSWORD: ${WP_SUB_PASSWORD}
       REDIS_HOST: ${REDIS_HOST}
       REDIS_PORT: ${REDIS_PORT}
     volumes:
