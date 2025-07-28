@@ -1,9 +1,8 @@
-# Makefile
 USER=rguigneb
 DATA_DIR = /home/$(USER)/data
 SRCS=./srcs
 COMPOSE_YML=$(SRCS)/docker-compose.yml
-DK_COMPOSE=docker-compose -f $(COMPOSE_YML)
+DK_COMPOSE=docker compose -f $(COMPOSE_YML)
 
 all: setup up
 
@@ -11,10 +10,16 @@ setup:
 	@echo "Creating data directories..."
 	@mkdir -p $(DATA_DIR)/wordpress
 	@mkdir -p $(DATA_DIR)/mariadb
+	@echo "Configuring /etc/hosts for rguigneb.42.fr..."
+	@if ! grep -q "127.0.0.1 rguigneb.42.fr" /etc/hosts; then \
+		echo "127.0.0.1 rguigneb.42.fr" | sudo tee -a /etc/hosts > /dev/null; \
+	fi
 	@echo "Data directories created successfully!"
 
 up: setup
 	$(DK_COMPOSE) up -d --build
+	@sudo chown -R 33:33 $(DATA_DIR)/wordpress
+	@sudo chmod -R 755 $(DATA_DIR)/wordpress
 
 down:
 	$(DK_COMPOSE) down

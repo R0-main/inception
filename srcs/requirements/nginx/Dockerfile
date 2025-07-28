@@ -1,5 +1,8 @@
 FROM debian:bullseye
 
+ARG NGINX_PORT
+ENV NGINX_PORT=${NGINX_PORT}
+
 RUN apt update && apt-get -y install sudo
 RUN sudo apt install -y nginx openssl gettext-base
 RUN mkdir -p /var/www/html
@@ -11,6 +14,6 @@ COPY ./conf/nginx.conf /etc/nginx/templates/nginx.conf
 COPY ./tools/docker-entrypoint.sh /docker-entrypoint.sh
 RUN chmod +x /docker-entrypoint.sh
 
-EXPOSE 443
+EXPOSE ${NGINX_PORT}
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
