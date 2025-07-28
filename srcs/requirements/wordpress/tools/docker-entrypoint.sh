@@ -1,6 +1,7 @@
 #!/bin/bash
 
-export WORDPRESS_DB_PASSWORD=$(cat /run/secrets/wp_db_password)
+export WP_DB_USERNAME=$(sed -n '1p' /run/secrets/wp_db_credentials)
+export WP_DB_PASSWORD=$(sed -n '2p' /run/secrets/wp_db_credentials)
 
 export WP_ADMIN_USER=$(sed -n '1p' /run/secrets/wp_admin_user_credentials)
 export WP_ADMIN_EMAIL=$(sed -n '2p' /run/secrets/wp_admin_user_credentials)
@@ -14,10 +15,10 @@ export WP_SUB_PASSWORD=$(sed -n '3p' /run/secrets/wp_sub_user_credentials)
 if [ ! -f wp-config.php ]; then
     echo "Creating wp-config.php..."
     wp config create --allow-root \
-        --dbname=${WORDPRESS_DB_NAME} \
-        --dbuser=${WORDPRESS_DB_USER} \
-        --dbpass=${WORDPRESS_DB_PASSWORD} \
-        --dbhost=${WORDPRESS_DB_HOST} \
+        --dbname=${WP_DB_NAME} \
+        --dbuser=${WP_DB_USERNAME} \
+        --dbpass=${WP_DB_PASSWORD} \
+        --dbhost=${WP_DB_HOST} \
         --dbcharset=utf8mb4 \
         --dbcollate=''
 fi

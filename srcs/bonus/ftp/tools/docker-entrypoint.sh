@@ -7,6 +7,5 @@ echo $FTP_USERNAME > /etc/vsftpd.userlist
 
 useradd -m -d /ftp/wordpress -s /usr/sbin/nologin $FTP_USERNAME
 echo $FTP_USERNAME:$FTP_USER_PASSWORD | chpasswd
-usermod -a -G www-data $FTP_USER
 
 exec vsftpd /etc/vsftpd.conf
