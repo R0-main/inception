@@ -9,6 +9,8 @@ RUN hugo new site quickstart
 
 WORKDIR /quickstart
 
+COPY ./static/ /quickstart/
+
 RUN hugo new content content/posts/my-first-post.md
 
 EXPOSE ${STATIC_WEBSITE_PORT}

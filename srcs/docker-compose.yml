@@ -149,8 +149,6 @@ services:
       args:
         STATIC_WEBSITE_PORT: ${STATIC_WEBSITE_PORT}
     restart: always
-    volumes:
-      - static-website:/quickstart/
     depends_on:
       - nginx
     networks:
