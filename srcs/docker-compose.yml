@@ -21,12 +21,6 @@ volumes:
       type: none
       o: bind
       device: ${VOLUME_MARIADB_PATH}
-  static-website:
-    driver: local
-    driver_opts:
-      type: none
-      o: bind
-      device: ${VOLUME_STATIC_PATH}
 
 # ──────────────────────────────
 #           SECRETS
