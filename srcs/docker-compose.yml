@@ -42,6 +42,8 @@ secrets:
     file: ../secrets/n8n/db_credentials.txt
   n8n_encryption_key:
     file: ../secrets/n8n/encryption_key.txt
+  ftp_user_credentials:
+    file: ../secrets/ftp/ftp_user_credentials.txt
 
 # ──────────────────────────────
 #           SERVICES
@@ -163,10 +165,13 @@ services:
         FTP_MIN_PORT: ${FTP_MIN_PORT}
         FTP_MAX_PORT: ${FTP_MAX_PORT}
     restart: always
+    secrets:
+      - ftp_user_credentials
     volumes:
-      - wordpress:/home/ftpuser/wordpress
+      - wordpress:/ftp/wordpress
     ports:
       - "${FTP_PORT}:${FTP_PORT}"
+      - "${FTP_MIN_PORT}-${FTP_MAX_PORT}:${FTP_MIN_PORT}-${FTP_MAX_PORT}"
     networks:
       - inception-network
 
