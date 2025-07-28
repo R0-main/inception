@@ -119,7 +119,7 @@ services:
   # ───── REDIS ─────
   redis:
     build:
-      context: "./requirements/bonus/redis/"
+      context: "./bonus/redis/"
       args:
         REDIS_PORT: ${REDIS_PORT}
     restart: always
@@ -131,7 +131,7 @@ services:
   # ───── ADMINER (DB GUI) ─────
   adminer:
     build:
-      context: "./requirements/bonus/adminer/"
+      context: "./bonus/adminer/"
       args:
        ADMINER_PORT: ${ADMINER_PORT}
     restart: always
@@ -145,7 +145,7 @@ services:
   # ───── STATIC WEBSITE ─────
   static-website:
     build:
-      context: "./requirements/bonus/static-website/"
+      context: "./bonus/static-website/"
       args:
         STATIC_WEBSITE_PORT: ${STATIC_WEBSITE_PORT}
     restart: always
@@ -157,7 +157,7 @@ services:
   # ───── FTP ─────
   ftp:
     build:
-      context: "./requirements/bonus/ftp/"
+      context: "./bonus/ftp/"
       args:
         FTP_PORT: ${FTP_PORT}
         FTP_MIN_PORT: ${FTP_MIN_PORT}
@@ -176,7 +176,7 @@ services:
   # ───── N8N ─────
   n8n:
     build:
-      context: "./requirements/bonus/n8n/"
+      context: "./bonus/n8n/"
       args:
         N8N_PORT: ${N8N_PORT}
     restart: always
