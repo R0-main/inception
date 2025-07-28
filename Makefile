@@ -1,16 +1,16 @@
-USER=rguigneb
-DATA_DIR = /home/$(USER)/data
-SRCS=./srcs
-COMPOSE_YML=$(SRCS)/docker-compose.yml
-DK_COMPOSE=docker compose -f $(COMPOSE_YML)
 
-# Colors and styles
-GREEN=\033[1;32m
-YELLOW=\033[1;33m
-RED=\033[1;31m
-BLUE=\033[1;34m
-BOLD=\033[1m
-RESET=\033[0m
+USER		=	rguigneb
+DATA_DIR	=	/home/$(USER)/data
+SRCS		=	./srcs
+COMPOSE_YML	=	$(SRCS)/docker-compose.yml
+DK_COMPOSE	=	docker compose -f $(COMPOSE_YML)
+
+GREEN		=	\033[1;32m
+YELLOW		=	\033[1;33m
+RED			=	\033[1;31m
+BLUE		=	\033[1;34m
+BOLD		=	\033[1m
+RESET		=	\033[0m
 
 all: setup up
 
